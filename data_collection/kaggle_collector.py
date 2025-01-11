@@ -69,3 +69,56 @@ def download_competition_dataset_colab(competition_name: str) -> List[str]:
         print("📄 Extracted data files:", extracted_data_files)
 
     return extracted_data_files
+
+
+def download_kaggle_dataset_colab(dataset: str, extract_path: str = "/content/data") -> List[str]:
+    """
+    Download and extract a dataset from Kaggle inside Google Colab.
+
+    Parameters:
+        dataset (str): Kaggle dataset slug (e.g., 'zynicide/wine-reviews').
+        extract_path (str): Path to extract dataset contents. Defaults to /content/data.
+
+    Returns:
+        List[str]: List of extracted filenames.
+    """
+    try:
+        from google.colab import files
+    except ImportError:
+        raise RuntimeError("This function is intended to be used inside Google Colab.")
+
+    print("📎 Please upload your kaggle.json file.")
+    files.upload()
+
+    kaggle_dir = "/root/.kaggle"
+    os.makedirs(kaggle_dir, exist_ok=True)
+
+    if not os.path.exists("kaggle.json"):
+        raise FileNotFoundError("❌ kaggle.json not found in current Colab directory.")
+
+    subprocess.run(["mv", "kaggle.json", os.path.join(kaggle_dir, "kaggle.json")], check=True)
+    subprocess.run(["chmod", "600", os.path.join(kaggle_dir, "kaggle.json")], check=True)
+
+    # Download dataset
+    dataset_slug = dataset.split("/")[-1]
+    zip_file = f"{dataset_slug}.zip"
+    print(f"📥 Downloading dataset: {dataset}")
+    subprocess.run(["kaggle", "datasets", "download", "-d", dataset], check=True)
+
+    # Extract the zip
+    os.makedirs(extract_path, exist_ok=True)
+    with zipfile.ZipFile(zip_file, "r") as zip_ref:
+        zip_ref.extractall(extract_path)
+    os.remove(zip_file)
+
+    # Unzip inner zip files (flat into extract_path)
+    for file in os.listdir(extract_path):
+        file_path = os.path.join(extract_path, file)
+        if file.endswith(".zip"):
+            with zipfile.ZipFile(file_path, "r") as zip_ref:
+                zip_ref.extractall(extract_path)
+            os.remove(file_path)
+
+    extracted = sorted(os.listdir(extract_path))
+    print("✅ Extracted files:", extracted)
+    return extracted
