@@ -1,8 +1,10 @@
 # mderic_data_prep_warteg
 
-**mderic_data_prep_warteg** is a modular Python library for building your own data preparation — from collecting data (e.g., from Kaggle), understanding the structure of dataframes, to handling missing values and other preprocessing tasks.
+**mderic_data_prep_warteg** is a Python library designed to simplify and automate the data preparation process for machine learning and data analysis workflows. Built with flexibility and ease of use in mind, it allows users to prepare their datasets using smart, configurable pipelines. 
 
-This toolkit is especially helpful for use in **Google Colab** and supports easy plug-and-play steps, so developers can customize their pipeline like:
+The library supports both local and Google Colab environments, and can be installed directly from GitHub via pip. 
+
+Users can automatically analyze their data using the *quick_profile()* function, generate recommended preprocessing configurations with *suggest_config()*, and apply those transformations through *run_pipeline()*. With a modular structure and support for YAML/JSON configs, the library makes the data preparation process easier, more transparent, and adaptable.
 
 
 ## ✨ Features
@@ -14,10 +16,11 @@ This toolkit is especially helpful for use in **Google Colab** and supports easy
 
 ```
 my\_pandas\_tools/
-└── data\_collection/
-    ├── **init**.py
-    └── kaggle\_collector.py
-
+├── data\_collection/
+|   ├── **init**.py
+|   └── kaggle\_collector.py
+└── utils/
+    └── profiling.py
 ````
 
 ## 🚀 Installation
@@ -30,14 +33,9 @@ pip install git+https://github.com/muhammadderic/mderic_data_prep_warteg.git
 
 ## 🛠️ Usage
 
-*on progress*
-
-
-## 📁 Developing Your Own Steps
-
-Each module (`data_collection`, `data_understanding`, `data_preparation`) can have many functions or classes. You can expand the system by:
-
-* Adding new collector functions (e.g., from APIs, Google Sheets, etc.)
+```python
+from data_collection.kaggle_collector import download_competition_dataset_colab, download_kaggle_dataset_colab
+```
 
 
 ## 📋 Requirements
