@@ -1,3 +1,5 @@
+import pandas as pd
+
 def quick_profile(df: pd.DataFrame) -> dict:
     profile = {}
 
