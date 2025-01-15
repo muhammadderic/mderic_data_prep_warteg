@@ -7,39 +7,29 @@ The library supports both local and Google Colab environments, and can be instal
 Users can automatically analyze their data using the *quick_profile()* function, generate recommended preprocessing configurations with *suggest_config()*, and apply those transformations through *run_pipeline()*. With a modular structure and support for YAML/JSON configs, the library makes the data preparation process easier, more transparent, and adaptable.
 
 
-## ✨ Features
-
-- Collect datasets and competition data from Kaggle (Colab-ready)
-
-
 ## 🧱 Project Structure
 
 ```
 my\_pandas\_tools/
+├── core/
+|   ├── config\_builder.py
+|   └── pipeline\_runner.py
 ├── data\_collection/
-|   ├── **init**.py
 |   └── kaggle\_collector.py
 └── utils/
     └── profiling.py
-````
+```
+
 
 ## 🚀 Installation
-
-You can install the package directly from GitHub (if hosted there):
+You can install the package directly from my GitHub :)
 
 ```bash
 pip install git+https://github.com/muhammadderic/mderic_data_prep_warteg.git
-````
-
-## 🛠️ Usage
-
-```python
-from data_collection.kaggle_collector import download_competition_dataset_colab, download_kaggle_dataset_colab
 ```
 
 
 ## 📋 Requirements
-
 * Python 3.7+
 * pandas
 * kaggle (only if using Kaggle data)
@@ -47,10 +37,8 @@ from data_collection.kaggle_collector import download_competition_dataset_colab,
 
 
 ## 📄 License
-
 MIT License
 
 
 ## 👤 Author
-
 muhammadderic – [@muhammadderic](https://github.com/muhammadderic)
