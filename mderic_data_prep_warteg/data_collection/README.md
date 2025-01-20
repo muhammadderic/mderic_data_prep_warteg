@@ -11,7 +11,7 @@
 for installing look at the main readme file :)
 
 ```python
-from data_collection.kaggle_collector import download_competition_dataset_colab, download_kaggle_dataset_colab
+from mderic_data_prep_warteg.data_collection import download_competition_dataset_colab, download_kaggle_dataset_colab --quiet
 
 download_competition_dataset_colab("competition_name")
 download_kaggle_dataset_colab("user/dataset_name")
